@@ -1,8 +1,8 @@
-const express = require('express'),
-      path = require('path'),
-      morgan = require('morgan'),
-      mysql = require('mysql'),
-      myConnection = require('express-myconnection');
+require('dotenv').config();
+
+const express = require('express');
+const path = require('path');
+const morgan = require('morgan');
 
 const app = express();
 
@@ -16,14 +16,8 @@ app.set('view engine', 'ejs');
 
 // middlewares
 app.use(morgan('dev'));
-app.use(myConnection(mysql, {
-  host: 'localhost',
-  user: 'root',
-  password: 'F3rn@ndo7a081643',
-  port: 3306,
-  database: 'crudnodejsmysql'
-}, 'single'));
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
 // routes
 app.use('/', customerRoutes);
